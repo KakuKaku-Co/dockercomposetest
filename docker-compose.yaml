@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  frontend:
+    image: read_time_pred_frontend
+    build:
+      context: .
+      dockerfile: ./frontend/Dockerfile
+      args:
+        REACT_APP_API_URL: http://backend:8000
+    ports:
+      - "3300:3000"
+    volumes:
+      - ./frontend/src:/app/frontend/src
+      - ./frontend/public:/app/frontend/public
+    command: ["serve", "-s", "build"]
+    environment:
+      - REACT_APP_API_URL=http://localhost:dockercompose
